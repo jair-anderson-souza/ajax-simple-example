@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+
+        <h1>Assynchronous Call Example</h1>
+
+        <form>
+            <label for="name">Employess's Name</label>
+            <select name="employess" onchange="retrieveEmployee(this.value)">
+                <option value=""></option>
+                <option value="Anderson Souza">Anderson Souza</option> 
+                <option value="Amanda Alves">Amanda Alves</option> 
+                <option value="Ricardo Job">Ricardo Job</option> 
+            </select>
+        </form>
+        <div id="txtHint">Customer info will be listed here...</div>
+    </body>
+
+    <script>
+        function retrieveEmployee(name) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+
+                if (xhttp.readyState === 4 && this.status === 200){
+                    document.getElementById('txtHint').innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("POST", "./retrieve?name=" + name , true);
+            xhttp.send();
+        }
+
+    </script>
+
+</html>
